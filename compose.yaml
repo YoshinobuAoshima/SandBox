@@ -1,0 +1,7 @@
+services:
+  app: 
+    build: #ビルドコンテキストの設定
+      context: .
+      dockergile: ./docker/app/Dockerfile
+    volumes:
+      - ./src/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
