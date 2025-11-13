@@ -21,7 +21,7 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
             
             # 最新コードを取得
-            git pull origin main
+            git pull
             
             # Dockerイメージのビルドとコンテナの再起動
             # (-d: バックグラウンド, --build: 変更があればビルドし直す)

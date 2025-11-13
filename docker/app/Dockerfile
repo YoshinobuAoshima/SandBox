@@ -1,14 +1,14 @@
 # イメージをビルドするためのベースイメージを設定
-FROM php:8.0-fpm-buster
+FROM php:8.0-fpm
 
 # コンテナ内のサーバー環境変数を設定
 ENV TZ Asia/Tokyo
 
 # コンテナビルド時に実行するコマンド &&で複数のコマンドをつなぎ,\で改行
+# ↑インストール可能なパッケージの一覧を更新、↓必要なパッケージをインストール
+# PHPの拡張ライブラリをインストール
 RUN apt-get update && \
-    # ↑インストール可能なパッケージの一覧を更新、↓必要なパッケージをインストール
     apt-get install -y git unzip libzip-dev libicu-dev libonig-dev && \
-    # PHPの拡張ライブラリをインストール
     docker-php-ext-install intl pdo_mysql zip bcmath
 
     # ローカルで作成したphp.iniをDockerコンテナ内にコピー
