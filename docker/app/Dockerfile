@@ -1,5 +1,5 @@
 # イメージをビルドするためのベースイメージを設定
-FROM php:8.4-fpm
+FROM php:8.0-fpm-bullseye
 
 # コンテナ内のサーバー環境変数を設定
 ENV TZ Asia/Tokyo
