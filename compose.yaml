@@ -11,7 +11,7 @@ services:
       context: .
       dockerfile: ./docker/web/Dockerfile
     ports:
-      - 8080:80 #ホストの8001ポートをコンテナの80ポートにマッピング
+      - 8080:80 #ホストの8080ポートをコンテナの80ポートにマッピング
     depends_on:
       - app #webサービスはappサービスに依存
     volumes:
