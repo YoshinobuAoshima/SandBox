@@ -13,7 +13,7 @@ RUN apt-get update && \
 
     # ローカルで作成したphp.iniをDockerコンテナ内にコピー
     # COPY ローカルパス コンテナパス
-    #ローカルパスはDockerfileからではなく、docker buildコマンドを実行したディレクトリ(composer.yml)からの相対パスで指定
+    # ローカルパスはDockerfileからではなく、docker buildコマンドを実行したディレクトリ(composer.yml)からの相対パスで指定
 COPY ./docker/app/php.ini /usr/local/etc/php/php.ini
 
 # Laravelを使うためComposerをインストール
