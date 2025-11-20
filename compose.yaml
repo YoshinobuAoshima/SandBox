@@ -1,6 +1,7 @@
 services:
-  app: 
-    build: #ビルドコンテキストの設定
+  app:
+    build:
+      #ビルドコンテキストの設定
       context: .
       dockerfile: ./docker/app/Dockerfile
     volumes:
@@ -12,6 +13,7 @@ services:
       dockerfile: ./docker/web/Dockerfile
     ports:
       - 8080:80 #ホストの8080ポートをコンテナの80ポートにマッピング
+      - 443:443
     depends_on:
       - app #webサービスはappサービスに依存
     volumes:
