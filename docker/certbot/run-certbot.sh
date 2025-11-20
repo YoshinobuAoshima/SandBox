@@ -9,11 +9,11 @@ TRIGGER_FILE="/var/www/certbot/nginx_reload_trigger"
 sleep 10
 
 while true; do
-    echo "Checking for certificate..."
+    echo "認証情報を確認しています..."
 
     # 証明書がCertbotによって管理されているか確認（renewal設定があるか）
     if [ ! -f "/etc/letsencrypt/renewal/$DOMAIN.conf" ]; then
-        echo "No existing Certbot certificate found. Requesting new one..."
+        echo "認証情報が見つかりませんでした。新しい認証情報を取得しています..."
         
         # ダミー証明書がある場合は削除（Certbotがエラーにならないように）
         rm -rf /etc/letsencrypt/live/$DOMAIN
@@ -26,13 +26,13 @@ while true; do
             
         # 取得成功したらリロードトリガーを作成
         if [ $? -eq 0 ]; then
-            echo "Certificate obtained successfully."
+            echo "認証情報の取得に成功しました。"
             touch "$TRIGGER_FILE"
         else
-            echo "Certificate request failed."
+            echo "認証情報の取得に失敗しました。"
         fi
     else
-        echo "Existing certificate found. Attempting renewal..."
+        echo "認証情報が見つかりました。更新を試みています..."
         certbot renew
         
         # 更新があった場合（または強制的に）リロードトリガーを作成
@@ -46,6 +46,6 @@ while true; do
     fi
 
     # 12時間待機
-    echo "Sleeping for 12 hours..."
+    echo "12時間待機しています..."
     sleep 12h
 done

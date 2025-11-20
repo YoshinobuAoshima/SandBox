@@ -7,7 +7,7 @@ TRIGGER_FILE="/var/www/certbot/nginx_reload_trigger"
 
 # 証明書がない場合、ダミー証明書を作成
 if [ ! -f "$CERT_DIR/fullchain.pem" ]; then
-    echo "Creating dummy certificate for $DOMAIN..."
+    echo "$DOMAIN のダミー証明書を作成しています..."
     mkdir -p "$CERT_DIR"
     openssl req -x509 -nodes -newkey rsa:4096 -days 1 \
         -keyout "$CERT_DIR/privkey.pem" \
@@ -16,14 +16,14 @@ if [ ! -f "$CERT_DIR/fullchain.pem" ]; then
 fi
 
 # Nginxをバックグラウンドで起動
-echo "Starting Nginx..."
+echo "Nginxを起動しています..."
 nginx -g "daemon off;" &
 NGINX_PID=$!
 
 # リロード監視ループ
 while true; do
     if [ -f "$TRIGGER_FILE" ]; then
-        echo "Reload trigger detected. Reloading Nginx..."
+        echo "$DOMAIN のリロードトリガーが検出されました。Nginxを再起動しています..."
         nginx -s reload
         rm -f "$TRIGGER_FILE"
     fi
