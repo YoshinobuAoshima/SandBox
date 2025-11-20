@@ -41,6 +41,8 @@ services:
     volumes:
       - certs-data:/etc/letsencrypt
       - certbot-webroot:/var/www/certbot
+      - ./docker/certbot/run-certbot.sh:/opt/run-certbot.sh
+    entrypoint: "/bin/sh /opt/run-certbot.sh"
 
 volumes:
   mysql-volume:
