@@ -18,6 +18,8 @@ services:
       - app #webサービスはappサービスに依存
     volumes:
       - ./src/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
+      - certs-data:/etc/letsencrypt
+      - certbot-webroot:/var/www/certbot
 
   db:
     build:
@@ -34,5 +36,13 @@ services:
     volumes:
       - mysql-volume:/var/lib/mysql
 
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certs-data:/etc/letsencrypt
+      - certbot-webroot:/var/www/certbot
+
 volumes:
   mysql-volume:
+  certs-data:
+  certbot-webroot:

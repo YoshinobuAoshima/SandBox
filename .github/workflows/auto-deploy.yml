@@ -24,11 +24,6 @@ jobs:
             # 最新コードを取得
             git pull origin main
             
-            # SSL証明書の配置
-            mkdir -p docker/web/certs
-            echo "${{ secrets.SSL_CRT }}" > docker/web/certs/server.crt
-            echo "${{ secrets.SSL_KEY }}" > docker/web/certs/server.key
-            
             # Dockerイメージのビルドとコンテナの再起動
             # (-d: バックグラウンド, --build: 変更があればビルドし直す)
             docker compose up -d --build
