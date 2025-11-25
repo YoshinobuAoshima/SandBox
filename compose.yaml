@@ -10,7 +10,6 @@ services:
       - ./src/1/:/app1 #ホストのsrcディレクトリをコンテナの/appにバインドマウント
       - ./src/2/:/app2 #ホストのsrcディレクトリをコンテナの/appにバインドマウント
 
-  # TODO: Web1とWeb2のコンテナを分けてポートも分ける（Web1のプロキシからWeb2のポートにアクセスするように）
   web1:
     build:
       context: .
