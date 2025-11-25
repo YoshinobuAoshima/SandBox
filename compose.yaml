@@ -7,7 +7,7 @@ services:
       args:
         - APP_ENV=${APP_ENV:-local}
     volumes:
-      - ./src/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
+      - ./src/1/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
 
   # TODO: Web1とWeb2のコンテナを分けてポートも分ける（Web1のプロキシからWeb2のポートにアクセスするように）
   web1:
@@ -22,25 +22,21 @@ services:
     environment:
       - DOMAIN=${DOMAIN}
     volumes:
-      - ./src/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
+      - ./src/1/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
       - certs-data:/etc/letsencrypt
       - certbot-webroot:/var/www/certbot
 
   web2:
+    # プロキシ先専用
     build:
       context: .
       dockerfile: ./docker/web2/Dockerfile
-    ports:
-      - 80:80 #ホストの80ポートをコンテナの80ポートにマッピング
-      - 443:443
     depends_on:
       - app #webサービスはappサービスに依存
     environment:
       - DOMAIN=${DOMAIN}
     volumes:
-      - ./src/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
-      - certs-data:/etc/letsencrypt
-      - certbot-webroot:/var/www/certbot
+      - ./src/2/:/app #ホストのsrcディレクトリをコンテナの/appにバインドマウント
 
   db:
     build:
